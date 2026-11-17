@@ -307,7 +307,41 @@ adb shell /data/local/tmp/khleak su                     # 交互 root shell
 | SELinux | **`Permissive`**（root 路径强制先关） | 只有重启能回 `Enforcing`；`clean` 清不掉 |
 | `/data/local/tmp` | `0777`（ephemeral 进程要在里面放东西） | `khleak restore` 或重启 |
 | root 本身 | 内存态，重启即失效 | 重跑一次（本机 3 轮内成功） |
-| `.khleak-load` | 记了 7 秒负载账（单次开机上限 150 秒） | 重启清零 |
+| `.khleak-load` | 记了 7 秒负载账 | 重启清零 |
+
+### slab 几何与负载账（本机实测）
+
+利用链能不能走通，取决于这三个缓存的对象尺寸对不对得上。`/proc/slabinfo` 实测：
+
+| slab 缓存 | objsize | obj/slab | pages/slab | active / total | 在链里的角色 |
+|---|---|---|---|---|---|
+| `posix_timers_cache` | 264 | 31 | 2（order-1，8 KiB） | 434 / 589 | `k_itimer` 落点。被 free 的正是这一页，抢页抢的也是它 |
+| `task_struct` | 5312 | 6 | 8 | 4114 / 4824 | `4800 + 512`（`CONFIG_ANDROID_VENDOR_TASK_STRUCT_SIZE`）；`cred`/`comm` 偏移都相对它 |
+| `cred_jar` | 192 | 21 | 1 | 1892 / 2373 | 伪造 cred 落地后被内核真正引用的对象 |
+
+三个数字互相咬合：`objsize=264` → 31 个填满一整张 order-1 页 → 只要抢到那张 8 KiB 页，
+payload 就能按 `obj_index * 264` 精确覆盖任意一个 `k_itimer`；而 `task_struct` 是 5312 而不是 4800，
+`cred` 落在 `0x820` —— 这也是不照抄 4800 布局的原因。
+
+负载账：
+
+```bash
+$ cat /data/local/tmp/.khleak-load
+5a4fb408-bccc-45e1-927e-0ec8d0d7b7f2 7
+```
+
+两个字段是 **`boot_id` + 本机开机以来累计消耗秒数**（第一次停车那轮 + 成功那轮合计 7 秒）。
+`boot_id` 一换就自动归零，所以它既是账本，也是"这台机器还是不是我上次记账的那次开机"的判据。
+
+预算有两个，别混：
+
+| 名字 | 值 | 性质 |
+|---|---|---|
+| `--budget-s` | 75（默认） | 单条命令的总预算，超了主动收工 |
+| `KH_BOOT_BUDGET` | 9999（编译期常量，可环境变量覆盖） | 按 `boot_id` 记账的累计上限，实际不构成卡口 |
+
+真正会杀人的不是这两个数，是 **watchdog**：`--lockers` 各做上百 MB `mprotect`，3 核满载超过约 90 秒就死机。
+所以"多跑几轮"要分段多次执行，不要拉大 `--attempts`。
 
 ---
 
@@ -354,7 +388,7 @@ adb shell '/data/local/tmp/khleak su -c "id; grep CapEff /proc/self/status"'
 | `--lockers N` | 3 | **硬上限 4**，再多会死机 |
 | `--vma N` | 30000 | **硬上限 40000** |
 | `--locker-pin N` | 0 | **设 1 会死机** |
-| `--budget-s N` | 75 | 单命令总预算（另有 `KH_BOOT_BUDGET=150` 单次开机上限） |
+| `--budget-s N` | 75 | 单命令总预算（另有 `KH_BOOT_BUDGET`，编译期 9999，按 boot_id 累计） |
 
 > 连续 3 核 120MB `mprotect` 超过约 90 秒会触发 watchdog 死机。
 > **要跑更多轮就分段多次执行，不要拉大 `attempts`。**
@@ -407,10 +441,29 @@ adb shell '/data/local/tmp/khleak su -c "id; grep CapEff /proc/self/status"'
 | 2026-11-17 11:14 | 硬重启（`boot_id=5a4fb408…`），残留自动清空 |
 | 2026-11-17 11:16 | `carrier-test` 通过；tracefs 间接 arm 验证通过 |
 | 2026-11-17 11:21 | **第 3 轮命中，`uid=0` + FULLCAP** |
+| 2026-11-17 11:45 | 核查 LSPosed 前提：`/data/adb` 空、无 magisk/ksu/zygisk → 运行期 root 补不上 Zygisk 注入点 |
 
 ---
 
-## 10. 声明
+## 10. 附加评估：LSPosed 生态（2026-11-17 实测）
+
+一句话：**装不上，卡点不是版本也不是权限，是没有 boot 期 root。**
+
+- Vector 是 Zygisk 模块（包内 `module.prop`：`id=zygisk_vector`，`Android 8.1 ~ 17`），
+  安装器走 Magisk/KernelSU 的 `update-binary` 协议，注入点在 **zygote 启动之前**；
+- khleak 给的是**运行期** `uid=0`，zygote 早已 fork，追不回去补注入；
+- 实测证据：`/data/adb` 只有 `.`/`..`、无 `modules/`、无 `ksu/`、无 magiskd/ksud 进程、
+  `ro.debuggable=0`。所以「ZygiskSU 已在」这条在这台机器上不成立；
+- 顺带纠正：「Android 16 上停在 1.9.2、不要升级」在 **A17** 上是反的 ——
+  1.9.2 只到 A14，Vector v2.2 自己写着支持到 17。
+
+三条路的取舍、你那 6 项模块逐条能不能落地（唯一硬边界是 `system_server` 作用域的
+Disable-FLAG_SECURE）、解锁后的完整步骤、LSPatch 本地模式的命令，都在
+[`docs/lsposed-plan.md`](docs/lsposed-plan.md)。
+
+---
+
+## 11. 声明
 
 本文档记录的是**自己设备的离线验证与实机过程**，用于说明"为什么可以相信这套地址"。
 涉及的 CVE 是已公开、已修复（mainline `acb03d388181`，stable 6.6.158 / 6.12.112 / 6.18.54 / 7.2.8）
