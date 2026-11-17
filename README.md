@@ -457,8 +457,20 @@ adb shell '/data/local/tmp/khleak su -c "id; grep CapEff /proc/self/status"'
 - 顺带纠正：「Android 16 上停在 1.9.2、不要升级」在 **A17** 上是反的 ——
   1.9.2 只到 A14，Vector v2.2 自己写着支持到 17。
 
-三条路的取舍、你那 6 项模块逐条能不能落地（唯一硬边界是 `system_server` 作用域的
-Disable-FLAG_SECURE）、解锁后的完整步骤、LSPatch 本地模式的命令，都在
+**但免 root 这条路没被堵死。** 2026-11-17 12:05 实测：LSPatch 0.6 在 A17 上死于
+`NoSuchFieldError: android.app.ActivityThread$AppBindData#compatInfo`（该字段 A17 已删），
+换成基于 Vector 核心的 **NPatch v1.1.0**（官方声明 Android 17 Ready，`targetSdk=37`）后，
+补丁包在本机正常启动 —— 真机日志 `KPROBE: launch-ok sdk=37`，`topResumedActivity=…/.MainActivity`。
+
+| 方案 | 版本 | A17 实测 |
+|---|---|---|
+| LSPosed / Vector（需 Zygisk） | v2.2 | ❌ 没有 boot 期 root，装不上 |
+| LSPatch | 0.6（核心 1.9.2） | ❌ `NoSuchFieldError: AppBindData#compatInfo` |
+| **NPatch（免 root，改 APK）** | **v1.1.0（Vector core-837）** | ✅ 起来并跑通 |
+
+管理器已装：`top.nkbe.npatch` `1.1.0 (857)` `targetSdk=37`。
+三条路的取舍、6 项模块逐条能不能落地（唯一硬边界是 `system_server` 作用域的
+Disable-FLAG_SECURE）、解锁后的完整步骤、NPatch/LSPatch 的命令与实测日志，都在
 [`docs/lsposed-plan.md`](docs/lsposed-plan.md)。
 
 ---

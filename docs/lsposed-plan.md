@@ -15,6 +15,11 @@
 khleak 给的是**用户态运行期** `uid=0 + FULLCAP`，那时候 zygote 早就 fork 完了，
 已经在跑的 App 进程追不回去补注入。
 
+**但「免 root 装模块」这条路没有被完全堵死**：2026-11-17 12:05 实测，
+用 [NPatch](https://github.com/7723mod/NPatch) v1.1.0（Vector 核心，官方声明适配 Android 17 / SDK 37）
+打出来的补丁包**在本机正常启动**（`KPROBE launch-ok sdk=37`）。细节与实测日志见 §10。
+LSPatch 0.6 则确认在 A17 上不可用（见 §10.2 的 `NoSuchFieldError`）。
+
 顺带纠正一条流传的说法：
 
 > 「Android 16 上原版 LSPosed 停在 1.9.2（2023），社区分支叫 Vector，不要升级成新版，模块作用域会和 ZygiskSU 对不上」
@@ -155,6 +160,10 @@ adb shell 'su -c "cat /data/adb/modules/zygisk_vector/module.prop"'
 
 ## 7. 如果选 B：LSPatch 本地模式
 
+> ⚠️ 2026-11-17 实测：LSPatch 0.6（核心 1.9.2）在 Android 17 上**不可用**，
+> 卡在 `NoSuchFieldError: android.app.ActivityThread$AppBindData#compatInfo`（该字段 A17 已移除）。
+> 请直接看 §10 的 NPatch 方案，本节仅留作对照。
+
 PC 侧（本机 JDK 17 可用）：
 
 ```bash
@@ -233,3 +242,120 @@ u:object_r:unlabeled:s0
    （A17 上 `am start -a VIEW -d file://…` 已被禁，只能靠 UI）。
 
 这两条都不属于技术难题，但都需要你在手机上动手 —— 这也是为什么路线 B 现在还没跑起来。
+
+
+---
+
+## 10. 实测结果：免 root 路线改用 NPatch，Android 17 上能跑
+
+### 10.1 结论
+
+| 方案 | 版本 | Android 17 实测 | 判定 |
+|---|---|---|---|
+| LSPatch | 0.6（核心 LSPosed 1.9.2，2023-11） | `NoSuchFieldError: android.app.ActivityThread$AppBindData#compatInfo` → 进程被杀 → `ClassNotFoundException: com.kuro.probe.MainActivity` | ❌ 硬不兼容（反射的私有字段在 A17 被删） |
+| **NPatch** | **v1.1.0（核心 Vector `core-837`）** | loader 全部就位，`KPROBE launch-ok sdk=37`，`topResumedActivity=…/.MainActivity` | ✅ 可用 |
+| LSPosed / Vector | v2.2 | 装不上（无 Zygisk 宿主） | ❌ 见 §2 |
+
+NPatch 的官方发布说明里明确写了 **「Android 17 Ready：Fully compatible with Android 17 (SDK 37)」**，
+这和我们实测一致。
+
+### 10.2 LSPatch 挂在哪一行
+
+```
+I LSPatch-MetaLoader: Bootstrap loader from embedment
+D nativeloader: Load …base.apk!/assets/lspatch/so/arm64-v8a/liblspatch.so … ok
+E LSPatch : createLoadedApk
+E LSPatch : java.lang.NoSuchFieldError: android.app.ActivityThread$AppBindData#compatInfo
+E LSPatch :   at de.robv.android.xposed.XposedHelpers.findField(XposedHelpers.java:246)
+```
+
+`AppBindData.compatInfo` 是 LSPatch 用来替换 ClassLoader 的锚点，AOSP 在 Android 17 上把它删了。
+这不是"改个参数"能绕的，必须改核心代码 —— 所以要用基于 Vector 的 NPatch。
+
+### 10.3 NPatch 的实测链路（本机，2026-11-17 12:04）
+
+产物与校验：
+
+| 文件 | 大小 | sha256 |
+|---|---|---|
+| `jar-v1.1.0-857-release.jar` | 9721803 | `903f5899f710fe920d2a48035f91d0b2a1f86eee86fcff53618ea9f9bd0b6a3d` |
+| `manager-v1.1.0-857-release.apk` | 6309578 | `548bc86978bf10c6acd9a0076bdc97cc70c30b36648d7b891a0c3cafda9012e0` |
+
+CLI 要 **Java 21**（class 版本 65），本机原只有 JDK 17 → 单独拉了 `jdk-21.0.13+9-jre` 放在
+`xiaomi15-root-audit/lsposed/jre21/`。
+
+补丁过程：
+
+```
+$ java -jar jar-v1.1.0-857-release.jar -o probeapp/build/npatch-app -f probeapp/build/probe2-signed.apk
+Signing apk with built-in NPatch keystore (V2+V3, minSdk 28)...
+Adding metaloader dex...            ← 替换成 classes.dex
+Adding loader dex...                ← assets/npatch/
+Adding native lib...                ← assets/npatch/libnpatch.so
+Creating nested apk link...         ← 原包变 assets/lspatch/origin.apk 这种嵌套
+Done. Output APK: …/probe2-signed-857-npatched.apk   (787 KB)
+```
+
+装机后的运行日志（全部来自真机 logcat）：
+
+```
+I NPatch-MetaLoader: Loading native bootstrap: /data/user/0/com.kuro.probe/cache/npatch/libnpatch-*.so
+I NPatch  : Use manager: false
+I NPatch  : Signature bypass level: 1
+I NPatch-ApkHelper: Extracting origin.apk from assets.
+I NPatch  : Original app declared no AppComponentFactory; clearing the stub
+I NPatch  : hooked app initialized: android.app.LoadedApk@e2a1df1
+I NPatch  : createLoadedApkWithContext cost: 10ms
+W NPatch  : NeoLocal: Cannot reach Manager Provider.        ← 没装管理器时的正常回退
+I NPatch  : legacy handleLoadPackage dispatched by framework hook: com.kuro.probe
+I NPatch  : Appended host native library paths via ClassLoader.addNativePath: […base.apk!/lib/arm64-v8a]
+I KPROBE  : attachBaseContext loader=dalvik.system.PathClassLoader
+I KPROBE  : app-oncreate loader=dalvik.system.PathClassLoader
+I KPROBE  : launch-ok sdk=37 loader=dalvik.system.PathClassLoader
+```
+
+最后一行 `sdk=37` 就是 Android 17。`topResumedActivity=com.kuro.probe/.MainActivity`，界面在。
+
+### 10.4 一个必须记住的前提：被测 App 要声明自己的 Application
+
+我们第一版测试 APK **没有** `android:name` 的 Application 类，NPatch 两条配置都不成：
+
+- 默认 `-l 1`（开签名绕过）→ 进程被 `SIGILL` 打死，崩在 `NPatch-LogFlush` 线程
+  （`Fatal signal 4 (SIGILL), code 1 (ILL_ILLOPC)`，栈里是 `XposedLogPrinter.drainLogLoop`）；
+- `-l 0`（关签名绕过）→ 退回 `ClassNotFoundException: com.kuro.probe.MainActivity`。
+
+补上一个 20 行的 `ProbeApp extends Application`（带 `attachBaseContext`/`onCreate` 日志）后，**一次通过**。
+所以上表那组"失败"里混着"极简包没有 Application"这个变量，不能直接当成 A17 不兼容的证据。
+
+好消息是真实 App（微信、B站、高德、各家视频）**都有**自己的 Application，形态和通过的这版一致。
+但仍要拿真 App 复验一次才算定论。
+
+### 10.5 管理器已装好
+
+```
+top.nkbe.npatch  versionName=1.1.0  versionCode=857  minSdk=28  targetSdk=37
+```
+
+装它的意义是拿到**本地模式的模块/作用域配置**：没有管理器时 NPatch 只能走
+`NeoLocal: offline fallback mode`（`Loading from cache: []`），等于没有任何模块。
+
+### 10.6 下一步（要你选 App）
+
+真正的模块使用路径是：
+
+```
+NPatch 管理器选 APK → 选模块 → 生成补丁包 → 卸载原版 → 安装补丁版 → 在管理器里配作用域
+```
+
+PC 侧等价命令：
+
+```bash
+# 本地模式（作用域在管理器里配，换模块不用重打补丁）
+java -jar jar-v1.1.0-857-release.jar --manager -o out target.apk
+
+# 集成模式（模块直接嵌进 APK，自带模块，不依赖管理器）
+java -jar jar-v1.1.0-857-release.jar -m module.apk -o out target.apk
+```
+
+代价不变：签名变了 → 原版必须先卸载 → **App 数据会丢**（微信要先备份聊天记录）。
+`system_server` 作用域的模块（Disable-FLAG_SECURE 这类）仍然做不到，这条硬边界没变。
