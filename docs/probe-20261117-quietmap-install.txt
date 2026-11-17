@@ -1,0 +1,7 @@
+    versionCode=22 minSdk=29 targetSdk=36
+    versionName=0.9.3
+    versionCode=170300 minSdk=21 targetSdk=35
+    versionName=17.03.0.2008
+9bf3097d91db7e541c988007b45a7d5bce850f1eb1581109c1aaa8ff1792744c *xiaomi15-root-audit/lsposed/quietmap/quietmap-0.9.3.apk
+50a7d6fff6a1fc7c77ce66bc89da90c20a79cbbd79dbe00a18c58bbdc67f2e91 *xiaomi15-root-audit/lsposed/quietmap/amap-original.apk
+ce5c53801adcea10e4ebacbe575ec50f5d48309f2af741c5c550088de9a9eff6 *xiaomi15-root-audit/lsposed/quietmap/patched/amap-original-857-npatched.apk

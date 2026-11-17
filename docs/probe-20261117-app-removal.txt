@@ -1,0 +1,201 @@
+com.mobiletools.systemhelper => Failure [only root can delete system app for a particular user]
+com.sohu.inputmethod.sogou.xiaomi => Failure [only root can delete system app for a particular user]
+com.miui.personalassistant => Failure [only root can delete system app for a particular user]
+com.miui.yellowpage => Failure [only root can delete system app for a particular user]
+com.miui.hybrid => Failure [only root can delete system app for a particular user]
+com.miui.analytics => Failure [only root can delete system app for a particular user]
+com.miui.systemAdSolution => Failure [only root can delete system app for a particular user]
+com.miui.guardprovider => Failure [only root can delete system app for a particular user]
+com.xiaomi.macro => Failure [only root can delete system app for a particular user]
+com.xiaomi.payment => Failure [only root can delete system app for a particular user]
+--- 尝试 disable-user ---
+com.mobiletools.systemhelper => 
+Exception occurred while executing 'disable-user':
+java.lang.SecurityException: Cannot disable system packages.
+	at com.android.server.pm.PackageManagerServiceImpl.shouldRestrictEnabledSettingsChange(PackageManagerServiceImpl.java:1128)
+	at com.android.server.pm.PackageManagerService.setEnabledSettings(PackageManagerService.java:4530)
+	at com.android.server.pm.PackageManagerService.-$$Nest$msetEnabledSettings(PackageManagerService.java:0)
+	at com.android.server.pm.PackageManagerService$IPackageManagerImpl.setApplicationEnabledSetting(PackageManagerService.java:6638)
+	at com.android.server.pm.PackageManagerShellCommand.runSetEnabledSetting(PackageManagerShellCommand.java:2498)
+	at com.android.server.pm.PackageManagerShellCommand.onCommand(PackageManagerShellCommand.java:307)
+	at com.android.modules.utils.BasicShellCommandHandler.exec(BasicShellCommandHandler.java:97)
+	at android.os.ShellCommand.exec(ShellCommand.java:39)
+	at com.android.server.pm.PackageManagerService$IPackageManagerImpl.onShellCommand(PackageManagerService.java:7512)
+	at android.os.Binder.shellCommand(Binder.java:1095)
+	at android.os.Binder.onTransact(Binder.java:953)
+	at android.content.pm.IPackageManager$Stub.onTransact(IPackageManager.java:4805)
+	at com.android.server.pm.PackageManagerService$IPackageManagerImpl.onTransact(PackageManagerService.java:7496)
+	at android.os.Binder.execTransactInternal(Binder.java:1389)
+	at android.os.Binder.execTransact(Binder.java:1343)
+com.sohu.inputmethod.sogou.xiaomi => 
+Exception occurred while executing 'disable-user':
+java.lang.SecurityException: Cannot disable system packages.
+	at com.android.server.pm.PackageManagerServiceImpl.shouldRestrictEnabledSettingsChange(PackageManagerServiceImpl.java:1128)
+	at com.android.server.pm.PackageManagerService.setEnabledSettings(PackageManagerService.java:4530)
+	at com.android.server.pm.PackageManagerService.-$$Nest$msetEnabledSettings(PackageManagerService.java:0)
+	at com.android.server.pm.PackageManagerService$IPackageManagerImpl.setApplicationEnabledSetting(PackageManagerService.java:6638)
+	at com.android.server.pm.PackageManagerShellCommand.runSetEnabledSetting(PackageManagerShellCommand.java:2498)
+	at com.android.server.pm.PackageManagerShellCommand.onCommand(PackageManagerShellCommand.java:307)
+	at com.android.modules.utils.BasicShellCommandHandler.exec(BasicShellCommandHandler.java:97)
+	at android.os.ShellCommand.exec(ShellCommand.java:39)
+	at com.android.server.pm.PackageManagerService$IPackageManagerImpl.onShellCommand(PackageManagerService.java:7512)
+	at android.os.Binder.shellCommand(Binder.java:1095)
+	at android.os.Binder.onTransact(Binder.java:953)
+	at android.content.pm.IPackageManager$Stub.onTransact(IPackageManager.java:4805)
+	at com.android.server.pm.PackageManagerService$IPackageManagerImpl.onTransact(PackageManagerService.java:7496)
+	at android.os.Binder.execTransactInternal(Binder.java:1389)
+	at android.os.Binder.execTransact(Binder.java:1343)
+com.miui.personalassistant => 
+Exception occurred while executing 'disable-user':
+java.lang.SecurityException: Cannot disable system packages.
+	at com.android.server.pm.PackageManagerServiceImpl.shouldRestrictEnabledSettingsChange(PackageManagerServiceImpl.java:1128)
+	at com.android.server.pm.PackageManagerService.setEnabledSettings(PackageManagerService.java:4530)
+	at com.android.server.pm.PackageManagerService.-$$Nest$msetEnabledSettings(PackageManagerService.java:0)
+	at com.android.server.pm.PackageManagerService$IPackageManagerImpl.setApplicationEnabledSetting(PackageManagerService.java:6638)
+	at com.android.server.pm.PackageManagerShellCommand.runSetEnabledSetting(PackageManagerShellCommand.java:2498)
+	at com.android.server.pm.PackageManagerShellCommand.onCommand(PackageManagerShellCommand.java:307)
+	at com.android.modules.utils.BasicShellCommandHandler.exec(BasicShellCommandHandler.java:97)
+	at android.os.ShellCommand.exec(ShellCommand.java:39)
+	at com.android.server.pm.PackageManagerService$IPackageManagerImpl.onShellCommand(PackageManagerService.java:7512)
+	at android.os.Binder.shellCommand(Binder.java:1095)
+	at android.os.Binder.onTransact(Binder.java:953)
+	at android.content.pm.IPackageManager$Stub.onTransact(IPackageManager.java:4805)
+	at com.android.server.pm.PackageManagerService$IPackageManagerImpl.onTransact(PackageManagerService.java:7496)
+	at android.os.Binder.execTransactInternal(Binder.java:1389)
+	at android.os.Binder.execTransact(Binder.java:1343)
+com.miui.yellowpage => 
+Exception occurred while executing 'disable-user':
+java.lang.SecurityException: Cannot disable system packages.
+	at com.android.server.pm.PackageManagerServiceImpl.shouldRestrictEnabledSettingsChange(PackageManagerServiceImpl.java:1128)
+	at com.android.server.pm.PackageManagerService.setEnabledSettings(PackageManagerService.java:4530)
+	at com.android.server.pm.PackageManagerService.-$$Nest$msetEnabledSettings(PackageManagerService.java:0)
+	at com.android.server.pm.PackageManagerService$IPackageManagerImpl.setApplicationEnabledSetting(PackageManagerService.java:6638)
+	at com.android.server.pm.PackageManagerShellCommand.runSetEnabledSetting(PackageManagerShellCommand.java:2498)
+	at com.android.server.pm.PackageManagerShellCommand.onCommand(PackageManagerShellCommand.java:307)
+	at com.android.modules.utils.BasicShellCommandHandler.exec(BasicShellCommandHandler.java:97)
+	at android.os.ShellCommand.exec(ShellCommand.java:39)
+	at com.android.server.pm.PackageManagerService$IPackageManagerImpl.onShellCommand(PackageManagerService.java:7512)
+	at android.os.Binder.shellCommand(Binder.java:1095)
+	at android.os.Binder.onTransact(Binder.java:953)
+	at android.content.pm.IPackageManager$Stub.onTransact(IPackageManager.java:4805)
+	at com.android.server.pm.PackageManagerService$IPackageManagerImpl.onTransact(PackageManagerService.java:7496)
+	at android.os.Binder.execTransactInternal(Binder.java:1389)
+	at android.os.Binder.execTransact(Binder.java:1343)
+com.miui.hybrid => 
+Exception occurred while executing 'disable-user':
+java.lang.SecurityException: Cannot disable system packages.
+	at com.android.server.pm.PackageManagerServiceImpl.shouldRestrictEnabledSettingsChange(PackageManagerServiceImpl.java:1128)
+	at com.android.server.pm.PackageManagerService.setEnabledSettings(PackageManagerService.java:4530)
+	at com.android.server.pm.PackageManagerService.-$$Nest$msetEnabledSettings(PackageManagerService.java:0)
+	at com.android.server.pm.PackageManagerService$IPackageManagerImpl.setApplicationEnabledSetting(PackageManagerService.java:6638)
+	at com.android.server.pm.PackageManagerShellCommand.runSetEnabledSetting(PackageManagerShellCommand.java:2498)
+	at com.android.server.pm.PackageManagerShellCommand.onCommand(PackageManagerShellCommand.java:307)
+	at com.android.modules.utils.BasicShellCommandHandler.exec(BasicShellCommandHandler.java:97)
+	at android.os.ShellCommand.exec(ShellCommand.java:39)
+	at com.android.server.pm.PackageManagerService$IPackageManagerImpl.onShellCommand(PackageManagerService.java:7512)
+	at android.os.Binder.shellCommand(Binder.java:1095)
+	at android.os.Binder.onTransact(Binder.java:953)
+	at android.content.pm.IPackageManager$Stub.onTransact(IPackageManager.java:4805)
+	at com.android.server.pm.PackageManagerService$IPackageManagerImpl.onTransact(PackageManagerService.java:7496)
+	at android.os.Binder.execTransactInternal(Binder.java:1389)
+	at android.os.Binder.execTransact(Binder.java:1343)
+com.miui.analytics => 
+Exception occurred while executing 'disable-user':
+java.lang.SecurityException: Cannot disable system packages.
+	at com.android.server.pm.PackageManagerServiceImpl.shouldRestrictEnabledSettingsChange(PackageManagerServiceImpl.java:1128)
+	at com.android.server.pm.PackageManagerService.setEnabledSettings(PackageManagerService.java:4530)
+	at com.android.server.pm.PackageManagerService.-$$Nest$msetEnabledSettings(PackageManagerService.java:0)
+	at com.android.server.pm.PackageManagerService$IPackageManagerImpl.setApplicationEnabledSetting(PackageManagerService.java:6638)
+	at com.android.server.pm.PackageManagerShellCommand.runSetEnabledSetting(PackageManagerShellCommand.java:2498)
+	at com.android.server.pm.PackageManagerShellCommand.onCommand(PackageManagerShellCommand.java:307)
+	at com.android.modules.utils.BasicShellCommandHandler.exec(BasicShellCommandHandler.java:97)
+	at android.os.ShellCommand.exec(ShellCommand.java:39)
+	at com.android.server.pm.PackageManagerService$IPackageManagerImpl.onShellCommand(PackageManagerService.java:7512)
+	at android.os.Binder.shellCommand(Binder.java:1095)
+	at android.os.Binder.onTransact(Binder.java:953)
+	at android.content.pm.IPackageManager$Stub.onTransact(IPackageManager.java:4805)
+	at com.android.server.pm.PackageManagerService$IPackageManagerImpl.onTransact(PackageManagerService.java:7496)
+	at android.os.Binder.execTransactInternal(Binder.java:1389)
+	at android.os.Binder.execTransact(Binder.java:1343)
+com.miui.systemAdSolution => 
+Exception occurred while executing 'disable-user':
+java.lang.SecurityException: Cannot disable system packages.
+	at com.android.server.pm.PackageManagerServiceImpl.shouldRestrictEnabledSettingsChange(PackageManagerServiceImpl.java:1128)
+	at com.android.server.pm.PackageManagerService.setEnabledSettings(PackageManagerService.java:4530)
+	at com.android.server.pm.PackageManagerService.-$$Nest$msetEnabledSettings(PackageManagerService.java:0)
+	at com.android.server.pm.PackageManagerService$IPackageManagerImpl.setApplicationEnabledSetting(PackageManagerService.java:6638)
+	at com.android.server.pm.PackageManagerShellCommand.runSetEnabledSetting(PackageManagerShellCommand.java:2498)
+	at com.android.server.pm.PackageManagerShellCommand.onCommand(PackageManagerShellCommand.java:307)
+	at com.android.modules.utils.BasicShellCommandHandler.exec(BasicShellCommandHandler.java:97)
+	at android.os.ShellCommand.exec(ShellCommand.java:39)
+	at com.android.server.pm.PackageManagerService$IPackageManagerImpl.onShellCommand(PackageManagerService.java:7512)
+	at android.os.Binder.shellCommand(Binder.java:1095)
+	at android.os.Binder.onTransact(Binder.java:953)
+	at android.content.pm.IPackageManager$Stub.onTransact(IPackageManager.java:4805)
+	at com.android.server.pm.PackageManagerService$IPackageManagerImpl.onTransact(PackageManagerService.java:7496)
+	at android.os.Binder.execTransactInternal(Binder.java:1389)
+	at android.os.Binder.execTransact(Binder.java:1343)
+com.miui.guardprovider => 
+Exception occurred while executing 'disable-user':
+java.lang.SecurityException: Cannot disable system packages.
+	at com.android.server.pm.PackageManagerServiceImpl.shouldRestrictEnabledSettingsChange(PackageManagerServiceImpl.java:1128)
+	at com.android.server.pm.PackageManagerService.setEnabledSettings(PackageManagerService.java:4530)
+	at com.android.server.pm.PackageManagerService.-$$Nest$msetEnabledSettings(PackageManagerService.java:0)
+	at com.android.server.pm.PackageManagerService$IPackageManagerImpl.setApplicationEnabledSetting(PackageManagerService.java:6638)
+	at com.android.server.pm.PackageManagerShellCommand.runSetEnabledSetting(PackageManagerShellCommand.java:2498)
+	at com.android.server.pm.PackageManagerShellCommand.onCommand(PackageManagerShellCommand.java:307)
+	at com.android.modules.utils.BasicShellCommandHandler.exec(BasicShellCommandHandler.java:97)
+	at android.os.ShellCommand.exec(ShellCommand.java:39)
+	at com.android.server.pm.PackageManagerService$IPackageManagerImpl.onShellCommand(PackageManagerService.java:7512)
+	at android.os.Binder.shellCommand(Binder.java:1095)
+	at android.os.Binder.onTransact(Binder.java:953)
+	at android.content.pm.IPackageManager$Stub.onTransact(IPackageManager.java:4805)
+	at com.android.server.pm.PackageManagerService$IPackageManagerImpl.onTransact(PackageManagerService.java:7496)
+	at android.os.Binder.execTransactInternal(Binder.java:1389)
+	at android.os.Binder.execTransact(Binder.java:1343)
+com.xiaomi.macro => 
+Exception occurred while executing 'disable-user':
+java.lang.SecurityException: Cannot disable system packages.
+	at com.android.server.pm.PackageManagerServiceImpl.shouldRestrictEnabledSettingsChange(PackageManagerServiceImpl.java:1128)
+	at com.android.server.pm.PackageManagerService.setEnabledSettings(PackageManagerService.java:4530)
+	at com.android.server.pm.PackageManagerService.-$$Nest$msetEnabledSettings(PackageManagerService.java:0)
+	at com.android.server.pm.PackageManagerService$IPackageManagerImpl.setApplicationEnabledSetting(PackageManagerService.java:6638)
+	at com.android.server.pm.PackageManagerShellCommand.runSetEnabledSetting(PackageManagerShellCommand.java:2498)
+	at com.android.server.pm.PackageManagerShellCommand.onCommand(PackageManagerShellCommand.java:307)
+	at com.android.modules.utils.BasicShellCommandHandler.exec(BasicShellCommandHandler.java:97)
+	at android.os.ShellCommand.exec(ShellCommand.java:39)
+	at com.android.server.pm.PackageManagerService$IPackageManagerImpl.onShellCommand(PackageManagerService.java:7512)
+	at android.os.Binder.shellCommand(Binder.java:1095)
+	at android.os.Binder.onTransact(Binder.java:953)
+	at android.content.pm.IPackageManager$Stub.onTransact(IPackageManager.java:4805)
+	at com.android.server.pm.PackageManagerService$IPackageManagerImpl.onTransact(PackageManagerService.java:7496)
+	at android.os.Binder.execTransactInternal(Binder.java:1389)
+	at android.os.Binder.execTransact(Binder.java:1343)
+com.xiaomi.payment => 
+Exception occurred while executing 'disable-user':
+java.lang.SecurityException: Cannot disable system packages.
+	at com.android.server.pm.PackageManagerServiceImpl.shouldRestrictEnabledSettingsChange(PackageManagerServiceImpl.java:1128)
+	at com.android.server.pm.PackageManagerService.setEnabledSettings(PackageManagerService.java:4530)
+	at com.android.server.pm.PackageManagerService.-$$Nest$msetEnabledSettings(PackageManagerService.java:0)
+	at com.android.server.pm.PackageManagerService$IPackageManagerImpl.setApplicationEnabledSetting(PackageManagerService.java:6638)
+	at com.android.server.pm.PackageManagerShellCommand.runSetEnabledSetting(PackageManagerShellCommand.java:2498)
+	at com.android.server.pm.PackageManagerShellCommand.onCommand(PackageManagerShellCommand.java:307)
+	at com.android.modules.utils.BasicShellCommandHandler.exec(BasicShellCommandHandler.java:97)
+	at android.os.ShellCommand.exec(ShellCommand.java:39)
+	at com.android.server.pm.PackageManagerService$IPackageManagerImpl.onShellCommand(PackageManagerService.java:7512)
+	at android.os.Binder.shellCommand(Binder.java:1095)
+	at android.os.Binder.onTransact(Binder.java:953)
+	at android.content.pm.IPackageManager$Stub.onTransact(IPackageManager.java:4805)
+	at com.android.server.pm.PackageManagerService$IPackageManagerImpl.onTransact(PackageManagerService.java:7496)
+	at android.os.Binder.execTransactInternal(Binder.java:1389)
+	at android.os.Binder.execTransact(Binder.java:1343)
+=== 有效方法: khleak su + runcon u:r:shell:s0 (uid 0) ===
+com.mobiletools.systemhelper => Success
+com.sohu.inputmethod.sogou.xiaomi => Success
+com.miui.personalassistant => Success
+com.miui.yellowpage => Success
+com.miui.hybrid => Success
+com.miui.analytics => Success
+com.miui.systemAdSolution => Success
+com.miui.guardprovider => Success
+com.xiaomi.payment => Success
