@@ -1,0 +1,31 @@
+2026-11-17 Asia/Shanghai | USB ADB read-only verification
+Source: adb -d shell, USB device dada / 24129PN74C; serial omitted.
+No exploit, installation, tracefs write, Binder execution transaction or reboot performed.
+
+ro.build.fingerprint=Xiaomi/dada/dada:17/CP2A.260605.016/OS4.0.4.0.XOCCNXM:user/release-keys
+ro.build.version.release=17
+ro.build.version.sdk=37
+ro.build.version.security_patch=2026-10-01
+uname -r=6.6.118-android15-8-gf72a02f47f4b-abogki551678766-4k
+ro.boot.flash.locked=1
+ro.boot.vbmeta.device_state=locked
+ro.boot.verifiedbootstate=green
+id=uid=2000(shell) context=u:r:shell:s0
+getenforce=Enforcing
+getconf PAGESIZE=4096
+/sys/devices/system/cpu/possible=0-7
+/proc/sys/kernel/perf_event_paranoid=-1
+/proc/slabinfo: readable, header slabinfo - version: 2.1
+/sys/kernel/tracing/events/kmem: event names listable
+/sys/kernel/tracing/trace_clock=[local] global counter uptime perf mono mono_raw boot tai
+/sys/kernel/tracing/events/kmem/kmem_cache_alloc/enable: ls Permission denied; test -r/-w false
+/sys/kernel/tracing/trace_pipe_raw: ls No such file or directory; test -r/-w false
+/sys/kernel/tracing/kprobe_events: -rwxrwxrwx root readtracefs; test -r/-w true; no actual write attempted
+MemTotal=15476156 kB
+MemAvailable=4716924 kB (point-in-time)
+service list: miui.mqsas.IMQSNative and miui.mqsas.MQSService registered
+command -v su: no executable on shell PATH, expected exit 1; subsequent guarded check exited 0
+
+Gitea source: main@4b07cdd retrieved using existing NAS SSH access to its bare repository.
+origin/main updated; HEAD left unchanged (7 local-only / 2 remote-only commits).
+Original unrelated working changes preserved. No merge, commit or push performed.

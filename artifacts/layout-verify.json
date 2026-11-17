@@ -1,0 +1,29 @@
+{
+  "prepare_creds_offsets_present": {
+    "0x0": false,
+    "0x8": false,
+    "0x28": false,
+    "0x30": false,
+    "0x38": false,
+    "0x40": false,
+    "0x48": false,
+    "0x50": false,
+    "0x80": true,
+    "0x88": true,
+    "0x90": false,
+    "0x98": true,
+    "0xa0": true
+  },
+  "set_task_comm_has_0x830": false,
+  "set_task_comm_sample": [
+    "0x10",
+    "0x20",
+    "0x30"
+  ],
+  "copy_process_has_cred_pair": {
+    "0x818": true,
+    "0x820": false,
+    "0x61c": true,
+    "0x880": true
+  }
+}

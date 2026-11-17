@@ -1,0 +1,48 @@
+Xiaomi 15 temporary-root preflight | 2026-11-17 Asia/Shanghai
+Outcome: preflight performed; no privilege escalation attempted.
+
+Device:
+Xiaomi/dada/dada:17/CP2A.260605.016/OS4.0.4.0.XOCCNXM:user/release-keys
+6.6.118-android15-8-gf72a02f47f4b-abogki551678766-4k
+SELinux Enforcing; /data/local/tmp 771 shell:shell; AVB green.
+
+slabinfo geometry (objsize, obj/slab, pages/slab):
+posix_timers_cache: 264,31,2
+task_struct: 5312,6,8
+cred_jar: 192,21,1
+mm_struct: 1280,25,8
+
+Accurate tracefs nodes:
+kprobe_events: mode 777
+kmem/rss_stat/trigger: mode 666; test -r/-w true
+kmem/mm_page_alloc/enable: mode 640
+per_cpu/cpu0/trace_pipe_raw: mode 440; test -r true
+/sys/kernel/btf/vmlinux: ls Permission denied; not extracted.
+No tracefs writes performed.
+
+Upstream:
+https://github.com/RMDycz/K80Pro-miro-CVE-2026-98260
+main revision: 9ae9981180097899cc2e2a01671c07bb4fe915f2
+release tag 1.2.0 revision: 8f85c07bb40fdd487105fd702f7b16f3356ac3b2
+Release asset SHA256: ac908d4089fd150fef36055f17e3ed056c8773e31f5ab7edcd428424db546ca2
+Asset ELF: Android AArch64, NDK r29, dynamically linked.
+Asset embedded build tag: khleak BUILD=2026-11-16-hazardfix v25
+Tag source embedded build tag: khleak BUILD=2026-11-16-guard v24
+Main source embedded build tag: khleak BUILD=2026-11-16-hazardfix v25
+Conclusion: asset does not self-identify as the tagged source version. No reproducible-build verification completed. This does not establish maliciousness.
+Source profile selection uses uname substring plus profile consistency checks; it does not prove target Image or device BTF identity.
+No NDK found in checked standard local paths. NAS checked candidate paths also absent (not exhaustive).
+
+Official OTA:
+Catalog https://miuirom.org/phones/xiaomi-15
+https://bkt-sgp-miui-ota-update-alisgp.oss-ap-southeast-1.aliyuncs.com/OS4.0.4.0.XOCCNXM/dada-ota_full-OS4.0.4.0.XOCCNXM-user-17.0-92227559a4.zip
+HEAD 200; size 8795504847; byte ranges supported.
+Metadata fetched by bounded HTTP ranges; not the full OTA.
+pre-device=dada
+post-build=Xiaomi/dada/dada:17/CP2A.260605.016/17OS4.0.261112.211508220.QCPECN.S:user/release-keys
+post-sdk-level=37
+post-security-patch-level=2026-10-01
+Metadata uses internal build numbering. Difference from visible fingerprint alone does not establish mismatch; boot/Image hash and running build equivalence remain unverified.
+
+No payload pushed to phone; no APK/module installation; no exploit invocation; no permission edits; no reboot; no partition writes.
+Next evidence needed: extract current OTA boot/Image, inspect vendor patch state, obtain matching layout information, and build audited fixed source reproducibly before any escalation test.

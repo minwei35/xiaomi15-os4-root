@@ -1,0 +1,252 @@
+{
+  "metadata_hash_verified": true,
+  "partitions": [
+    {
+      "name": "abl",
+      "size": 335872,
+      "sha256": "6ee1945b26168cf32c1a2ba54493f3316ed0c719c279b557d8c2cc83c11591a5"
+    },
+    {
+      "name": "aop",
+      "size": 372736,
+      "sha256": "3f6c47624b011b3d26a3a206af7f40bf2734460d46a212fc7f13cfa5c680acd8"
+    },
+    {
+      "name": "aop_config",
+      "size": 32768,
+      "sha256": "b1df91816d433cbc4528968300c31b078c997c5c231d12bc8b7ef1183c727408"
+    },
+    {
+      "name": "bluetooth",
+      "size": 3993600,
+      "sha256": "39c7f223ff7ce6c1bc83742f0f682d6fd43a382dad2d0a338e501eb6240fa4a1"
+    },
+    {
+      "name": "boot",
+      "size": 100663296,
+      "sha256": "7935a651b43945b020bd02744489e1f1f7eeff032bb6c245b70fd31b0c1e2a2f"
+    },
+    {
+      "name": "countrycode",
+      "size": 1048576,
+      "sha256": "ed15958939423a792eceba77e1e116e957d807a6b2713c10e4ff40a51b9b58ed"
+    },
+    {
+      "name": "cpucp",
+      "size": 319488,
+      "sha256": "bc6bba6cb9e9c9c7f38aa747e6649fade4f6973c4e3a5158b93b5f24249a7636"
+    },
+    {
+      "name": "cpucp_dtb",
+      "size": 16384,
+      "sha256": "7d3b6828025bcc24b184eb4ff41da25d15ce9a3820e4d878795e49e64f36b44a"
+    },
+    {
+      "name": "devcfg",
+      "size": 61440,
+      "sha256": "a4184cc6642e220ecfe0c4ffcd9c64a7851226e19301ae3f33cb6c8efee8a909"
+    },
+    {
+      "name": "dsp",
+      "size": 67108864,
+      "sha256": "93bf6239434b0cc6733fb9828c44a79c5da97c4892146a339aa0fcdd7810fe10"
+    },
+    {
+      "name": "dtbo",
+      "size": 18874368,
+      "sha256": "05a2cad9a7678ab289268f4e15c1d32a880c0a28b3cb84dcf3837afe1200eb01"
+    },
+    {
+      "name": "featenabler",
+      "size": 106496,
+      "sha256": "9880e0fbaa77f947abae68e1fd49e202021c23f9acbc6c243b0e665a407e2a33"
+    },
+    {
+      "name": "hyp",
+      "size": 1613824,
+      "sha256": "d3bb006e66acd9c4c73144f5ec0119ae79c4058387122e4d5570cfd43a7293a3"
+    },
+    {
+      "name": "idmanager",
+      "size": 69632,
+      "sha256": "511ee09bf8c5260d9b3e84786ede96f91d0963ed849a8453df75c779acaa7be1"
+    },
+    {
+      "name": "imagefv",
+      "size": 6299648,
+      "sha256": "78e4a7c9779ab0590a255cd1e9ce4ab2516e4c85a103973f76de94935116f838"
+    },
+    {
+      "name": "init_boot",
+      "size": 8388608,
+      "sha256": "ba4864d8e02ac1a855695ed72e165905cfdc558a960a29cc5aeb47ef44fa850c"
+    },
+    {
+      "name": "keymaster",
+      "size": 454656,
+      "sha256": "9f88614a9efa50f9a932fec64613da7d28eada71bed848669bd9f9d29c25fcba"
+    },
+    {
+      "name": "modem",
+      "size": 195702784,
+      "sha256": "b2569b146e241fb92e203ceee5adc5ef8bcb9fef7cbd429668a843e268022420"
+    },
+    {
+      "name": "modemfirmware",
+      "size": 136876032,
+      "sha256": "aed4d61b2cb38e08e1812493dc20e1e48b8ca8375179d83f17af54e17c7259a8"
+    },
+    {
+      "name": "multiimgqti",
+      "size": 12288,
+      "sha256": "bd619dd9ef992af0ee627fbb15cac9082df167d8f47da9b1ae814bc1f6c8db77"
+    },
+    {
+      "name": "odm",
+      "size": 3624095744,
+      "sha256": "8d75fe5c83c78cb9bfb3db9b3a3e0caba96bee7c1ec6a211924b239aa64faac1"
+    },
+    {
+      "name": "pdp",
+      "size": 212992,
+      "sha256": "e0fec71546abf3156d16b350dd42501dc4fdde155c538aa084a57a2fcc50c9d6"
+    },
+    {
+      "name": "pdp_cdb",
+      "size": 16384,
+      "sha256": "1ff5912844d6835010dec37d3e28c4f3c333b1086547bd1b7257084dda0eeeb9"
+    },
+    {
+      "name": "product",
+      "size": 4417421312,
+      "sha256": "106623aee126637ec564e6553e95638fe6d86c14d316730107a4082c4a23994c"
+    },
+    {
+      "name": "pvmfw",
+      "size": 1048576,
+      "sha256": "ba55152f47d4bc8166c23fb35d155c1d1923ad0dfc23a3951c62d1495e2d640f"
+    },
+    {
+      "name": "qupfw",
+      "size": 65536,
+      "sha256": "e408dc21d892fde925fa4374524c9b798712088849349a7de0dc5e626b74d1c9"
+    },
+    {
+      "name": "recovery",
+      "size": 104857600,
+      "sha256": "974ad45b001c37849afe287e07855357f606380704412d8246d2255995f3a7c4"
+    },
+    {
+      "name": "shrm",
+      "size": 151552,
+      "sha256": "058e006d2104ab6db9b06b502719c86d70ba6f824c33d6bbb754a20745553f53"
+    },
+    {
+      "name": "soccp_dcd",
+      "size": 20480,
+      "sha256": "5a2ade240c6a1c741b3493eb4cb1f7f0efc9148101b6535abe0633d736e53847"
+    },
+    {
+      "name": "soccp_debug",
+      "size": 147456,
+      "sha256": "56b69cb3a32865891e1777d71707e8a10a742d3bf348b835d84634b2edb0aaea"
+    },
+    {
+      "name": "spuservice",
+      "size": 94208,
+      "sha256": "abbc4253603f8659bff86ece68d58650e4dd5bdcc2b8e5a119de06a93dfa5ee3"
+    },
+    {
+      "name": "system",
+      "size": 977715200,
+      "sha256": "5d0ba7c2700d34223e8180b5828f135d0e18628f81f7d5765f1816bbada27bc4"
+    },
+    {
+      "name": "system_dlkm",
+      "size": 15282176,
+      "sha256": "cdd5f9c5720362a1d4d65af7c368410be9fdb82f9e2b050eae0f6461e8ee3f93"
+    },
+    {
+      "name": "system_ext",
+      "size": 817664000,
+      "sha256": "bed332680d5ab039928bb270d8a8cca0aadb38ba5295fcbd20a662aed221012c"
+    },
+    {
+      "name": "tz",
+      "size": 4173824,
+      "sha256": "8ce2e36b599c6353e8e8a35b8136b51a71ebaacf27a5e2774541eafcea37333b"
+    },
+    {
+      "name": "uefi",
+      "size": 2842624,
+      "sha256": "aed0e6771b019895671e09106f197c646a7630472a83b2353bbab9aa06ea3b4d"
+    },
+    {
+      "name": "uefisecapp",
+      "size": 204800,
+      "sha256": "37c614e33f9d98349330e1867dd7be10492b67847b65b2e00e6e2261fecbd89b"
+    },
+    {
+      "name": "vbmeta",
+      "size": 12288,
+      "sha256": "85213eccfffdd185dcf922d462b91f26101353dc85ae0c92b0ea739aea92e4be"
+    },
+    {
+      "name": "vbmeta_system",
+      "size": 4096,
+      "sha256": "ad8e4d986fc81c829440f7e291ddd7aaeca746ed9d9ae45ab5b6f4300ce19cdf"
+    },
+    {
+      "name": "vendor",
+      "size": 742723584,
+      "sha256": "1fcd3fd1a4e2d66e88dababd5a2e0bab47688171e0eaf771d2035e37a0e8d99f"
+    },
+    {
+      "name": "vendor_boot",
+      "size": 100663296,
+      "sha256": "9ddce20227d3f7e40d0457880b037ce944ced768ea256b68300311e5390854f7"
+    },
+    {
+      "name": "vendor_dlkm",
+      "size": 88543232,
+      "sha256": "47198c9827d9d34a139bad42030fe2133c6c45595371a61a38ca3bd05b6aa21b"
+    },
+    {
+      "name": "vm-bootsys",
+      "size": 20971520,
+      "sha256": "aaff61528868149706bf8db77bbebdba4b7cd4a4cfea0b175da7e3bcf0c9dd38"
+    },
+    {
+      "name": "xbl",
+      "size": 1191936,
+      "sha256": "f12fe6c8cd0799e0d97e320900144a52a9c93983a3375dbffa29af63bda6c225"
+    },
+    {
+      "name": "xbl_config",
+      "size": 348160,
+      "sha256": "fe07a50d90aca2281137bf2db7b738e50cfd74367158db41831bc7455fba91f9"
+    },
+    {
+      "name": "xbl_ramdump",
+      "size": 946176,
+      "sha256": "ba336a8477361d0840243a13fb4a4c7728afb1ed137e563d057a7b2a856e6081"
+    },
+    {
+      "name": "mi_product",
+      "size": 348160,
+      "sha256": "889ab19cd09b28b3167997bb90f5e1aeb61ae7aa293589eea3761890f2c5f674"
+    },
+    {
+      "name": "mi_ext",
+      "size": 171073536,
+      "sha256": "f9bc49fdbdc34b97fe1b1a8fa032478bf5a5299882bd481e83f88956fdbb148a"
+    }
+  ],
+  "boot": {
+    "header_version": 4,
+    "kernel_size": 36866560,
+    "sha256": "7935a651b43945b020bd02744489e1f1f7eeff032bb6c245b70fd31b0c1e2a2f",
+    "kernel_sha256": "7c9ecc459dde9a87c1fd9d8c0227cee1957ac8cde7f9d6cbe9aba4a3cbf6f91d",
+    "kernel_magic": "4d5a40fa19fc73140000000000000000"
+  }
+}

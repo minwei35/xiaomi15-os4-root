@@ -1,0 +1,5 @@
+{
+  "Tposix_cpu_timers_exit": "0xffffffc08019702c",
+  "Tbegin_new_exec": "0xffffffc0803d4c2c",
+  "texec_mmap": "0xffffffc0803d534c"
+}

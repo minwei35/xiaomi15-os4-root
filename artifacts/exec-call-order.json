@@ -1,0 +1,278 @@
+[
+  {
+    "address": "0xffffffc0803d4c74",
+    "target": "mnt_may_suid"
+  },
+  {
+    "address": "0xffffffc0803d4ca4",
+    "target": "down_write"
+  },
+  {
+    "address": "0xffffffc0803d4cbc",
+    "target": "make_vfsuid"
+  },
+  {
+    "address": "0xffffffc0803d4cd4",
+    "target": "make_vfsgid"
+  },
+  {
+    "address": "0xffffffc0803d4ce8",
+    "target": "inode_permission"
+  },
+  {
+    "address": "0xffffffc0803d4cf4",
+    "target": "up_write"
+  },
+  {
+    "address": "0xffffffc0803d4d04",
+    "target": "security_bprm_creds_from_file"
+  },
+  {
+    "address": "0xffffffc0803d4d38",
+    "target": "_raw_spin_lock_irq"
+  },
+  {
+    "address": "0xffffffc0803d4d50",
+    "target": "_raw_spin_unlock_irq"
+  },
+  {
+    "address": "0xffffffc0803d4d58",
+    "target": "unknown"
+  },
+  {
+    "address": "0xffffffc0803d4dac",
+    "target": "unknown"
+  },
+  {
+    "address": "0xffffffc0803d4db8",
+    "target": "zap_other_threads"
+  },
+  {
+    "address": "0xffffffc0803d4de0",
+    "target": "_raw_spin_unlock_irq"
+  },
+  {
+    "address": "0xffffffc0803d4de4",
+    "target": "schedule"
+  },
+  {
+    "address": "0xffffffc0803d4df4",
+    "target": "_raw_spin_lock_irq"
+  },
+  {
+    "address": "0xffffffc0803d4e04",
+    "target": "_raw_spin_unlock_irq"
+  },
+  {
+    "address": "0xffffffc0803d4e24",
+    "target": "cgroup_threadgroup_change_begin"
+  },
+  {
+    "address": "0xffffffc0803d4e2c",
+    "target": "_raw_write_lock_irq"
+  },
+  {
+    "address": "0xffffffc0803d4e44",
+    "target": "_raw_write_unlock_irq"
+  },
+  {
+    "address": "0xffffffc0803d4e48",
+    "target": "cgroup_threadgroup_change_end"
+  },
+  {
+    "address": "0xffffffc0803d4e4c",
+    "target": "schedule"
+  },
+  {
+    "address": "0xffffffc0803d4e64",
+    "target": "_raw_read_lock"
+  },
+  {
+    "address": "0xffffffc0803d4e74",
+    "target": "_raw_read_unlock"
+  },
+  {
+    "address": "0xffffffc0803d4e7c",
+    "target": "unknown"
+  },
+  {
+    "address": "0xffffffc0803d4ea8",
+    "target": "exchange_tids"
+  },
+  {
+    "address": "0xffffffc0803d4eb8",
+    "target": "transfer_pid"
+  },
+  {
+    "address": "0xffffffc0803d4ec8",
+    "target": "transfer_pid"
+  },
+  {
+    "address": "0xffffffc0803d4ed8",
+    "target": "transfer_pid"
+  },
+  {
+    "address": "0xffffffc0803d4f6c",
+    "target": "_raw_write_unlock_irq"
+  },
+  {
+    "address": "0xffffffc0803d4f70",
+    "target": "cgroup_threadgroup_change_end"
+  },
+  {
+    "address": "0xffffffc0803d4f78",
+    "target": "release_task"
+  },
+  {
+    "address": "0xffffffc0803d4fa0",
+    "target": "__io_uring_cancel"
+  },
+  {
+    "address": "0xffffffc0803d4fa8",
+    "target": "unshare_files"
+  },
+  {
+    "address": "0xffffffc0803d4fb8",
+    "target": "dma_buf_begin_new_exec"
+  },
+  {
+    "address": "0xffffffc0803d4fcc",
+    "target": "set_mm_exe_file"
+  },
+  {
+    "address": "0xffffffc0803d4fe0",
+    "target": "would_dump"
+  },
+  {
+    "address": "0xffffffc0803d4ff4",
+    "target": "would_dump"
+  },
+  {
+    "address": "0xffffffc0803d5000",
+    "target": "acct_arg_size"
+  },
+  {
+    "address": "0xffffffc0803d5008",
+    "target": "exec_mmap"
+  },
+  {
+    "address": "0xffffffc0803d5020",
+    "target": "get_dmabuf_info"
+  },
+  {
+    "address": "0xffffffc0803d5028",
+    "target": "unknown"
+  },
+  {
+    "address": "0xffffffc0803d5038",
+    "target": "exec_task_namespaces"
+  },
+  {
+    "address": "0xffffffc0803d5048",
+    "target": "_raw_spin_lock_irq"
+  },
+  {
+    "address": "0xffffffc0803d5050",
+    "target": "posix_cpu_timers_exit"
+  },
+  {
+    "address": "0xffffffc0803d5058",
+    "target": "_raw_spin_unlock_irq"
+  },
+  {
+    "address": "0xffffffc0803d5060",
+    "target": "exit_itimers"
+  },
+  {
+    "address": "0xffffffc0803d5064",
+    "target": "flush_itimer_signals"
+  },
+  {
+    "address": "0xffffffc0803d506c",
+    "target": "unshare_sighand"
+  },
+  {
+    "address": "0xffffffc0803d5080",
+    "target": "up_write"
+  },
+  {
+    "address": "0xffffffc0803d5094",
+    "target": "mutex_unlock"
+  },
+  {
+    "address": "0xffffffc0803d50d0",
+    "target": "flush_thread"
+  },
+  {
+    "address": "0xffffffc0803d50e8",
+    "target": "do_close_on_exec"
+  },
+  {
+    "address": "0xffffffc0803d5148",
+    "target": "unknown"
+  },
+  {
+    "address": "0xffffffc0803d5158",
+    "target": "set_dumpable"
+  },
+  {
+    "address": "0xffffffc0803d515c",
+    "target": "perf_event_exec"
+  },
+  {
+    "address": "0xffffffc0803d516c",
+    "target": "strrchr"
+  },
+  {
+    "address": "0xffffffc0803d5180",
+    "target": "__set_task_comm"
+  },
+  {
+    "address": "0xffffffc0803d5198",
+    "target": "flush_signal_handlers"
+  },
+  {
+    "address": "0xffffffc0803d51a0",
+    "target": "set_cred_ucounts"
+  },
+  {
+    "address": "0xffffffc0803d51ac",
+    "target": "security_bprm_committing_creds"
+  },
+  {
+    "address": "0xffffffc0803d51b4",
+    "target": "commit_creds"
+  },
+  {
+    "address": "0xffffffc0803d51d4",
+    "target": "perf_event_exit_task"
+  },
+  {
+    "address": "0xffffffc0803d51dc",
+    "target": "security_bprm_committed_creds"
+  },
+  {
+    "address": "0xffffffc0803d51ec",
+    "target": "get_unused_fd_flags"
+  },
+  {
+    "address": "0xffffffc0803d5200",
+    "target": "fd_install"
+  },
+  {
+    "address": "0xffffffc0803d5210",
+    "target": "unknown"
+  },
+  {
+    "address": "0xffffffc0803d5218",
+    "target": "unknown"
+  },
+  {
+    "address": "0xffffffc0803d5224",
+    "target": "__wake_up_parent"
+  },
+  {
+    "address": "0xffffffc0803d5228",
+    "target": "unknown"
+  }
+]

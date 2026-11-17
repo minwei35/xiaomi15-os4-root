@@ -1,0 +1,8 @@
+# 内核大件与工具链不入库，用 tools/ 里的脚本按需重建
+Image
+Image.kallsyms
+kernel-packed.bin
+boot-stock.img
+payload-metadata.bin
+*.disasm.txt
+__pycache__/

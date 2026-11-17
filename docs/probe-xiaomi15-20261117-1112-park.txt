@@ -1,0 +1,40 @@
+Xiaomi 15 (dada) khleak 首次实机尝试 —— fail-closed 停车快照
+采集时间：2026-11-17 11:11:48 CST
+采集方式：只读 adb shell（uid=2000 shell），未 kill、未断连、未改动 tracefs
+
+设备
+  build   : Xiaomi/dada/dada:17/CP2A.260605.016/OS4.0.4.0.XOCCNXM:user/release-keys
+  kernel  : 6.6.118-android15-8-gf72a02f47f4b-abogki551678766-4k
+  boot_id : 51e2f138-9766-4d3f-aa0a-2111b828c187
+  uptime  : up 11:17
+  loadavg : 11.35 11.61 11.53
+  selinux : Enforcing
+
+进程
+  20629  PPID 20626（父已消失，进程被孤儿化）  user=shell  comm=khleak-park
+  state=S  wchan=__arm64_sys_nanosleep  utime=190 stime=1257（三次采样完全不变 → 纯睡眠，未在推进）
+  fd: 0->pipe 1->pipe 2->pipe（stdout 仍连着 adb shell 的 tail，因此 tail 一直等不到 EOF）
+
+判定
+  comm 改为 "khleak-park" 只出现在 src/plant.c:plant_park_fail_closed()，
+  即：漏洞窗口已打开（timer 已 free、节点仍在 rbtree），抢页失败，工具主动停车不回收僵尸。
+  此时回收僵尸会让 rb_erase 把别人的空闲页当 rbtree 旋转写回 → panic/重启。
+  工具已忽略 SIGINT/SIGTERM/SIGHUP/SIGQUIT/SIGALRM，并要求硬重启。
+
+tracefs 残留（重启即清）
+  p:khl/slide  __arm64_sys_getpid ip=%pc:x64
+  p:khl/task   __set_task_comm task=%x0:x64 comm=+0x830(%x0):string tpid=+0x618(%x0):u32
+  p:kd/del     posix_cpu_timer_del head=+0x98(%x0):x64
+  p:kd/pe      posix_cpu_timers_exit
+  p:kd/ei      exit_itimers
+  （另有两条厂商自带的 miuibpf 探针，与本次无关）
+
+未发生的动作（确认没有副作用）
+  没有建立 /data/local/tmp/.khrootd.sock，没有 .khrootd.log
+  /data/local/tmp 权限仍为 0771（未被改成 0777）
+  SELinux 仍为 Enforcing（关 SELinux 阶段未落地）
+
+正确处置
+  1. 不要 kill 20629、不要 Ctrl-C、不要断开那条 adb 连接
+  2. 长按电源键 10 秒以上强制重启（硬复位不经过收尸路径）
+  3. 重启后确认：ps 里没有 khleak-park、kprobe_events 里没有 khl/kd 组

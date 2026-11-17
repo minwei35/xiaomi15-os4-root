@@ -1,0 +1,144 @@
+{
+  "matched": 16,
+  "mismatched": 7,
+  "rows": [
+    {
+      "symbol": "image_base",
+      "miro_expected": "0xffffffc080000000",
+      "device_recovered": "0xffffffc080000000",
+      "match": true
+    },
+    {
+      "symbol": "stext",
+      "miro_expected": "0xffffffc080010000",
+      "device_recovered": "0xffffffc080010000",
+      "match": true
+    },
+    {
+      "symbol": "getpid",
+      "miro_expected": "0xffffffc0800cda70",
+      "device_recovered": null,
+      "match": false
+    },
+    {
+      "symbol": "gettid",
+      "miro_expected": "0xffffffc0800cdaa0",
+      "device_recovered": null,
+      "match": false
+    },
+    {
+      "symbol": "getppid",
+      "miro_expected": "0xffffffc0800cdad0",
+      "device_recovered": null,
+      "match": false
+    },
+    {
+      "symbol": "set_task_comm",
+      "miro_expected": "0xffffffc0803d4ac4",
+      "device_recovered": "0xffffffc0803d4ac4",
+      "match": true
+    },
+    {
+      "symbol": "do_timer_create",
+      "miro_expected": "0xffffffc080195cf4",
+      "device_recovered": "0xffffffc080195cf4",
+      "match": true
+    },
+    {
+      "symbol": "copy_process",
+      "miro_expected": "0xffffffc0800ab7fc",
+      "device_recovered": "0xffffffc0800ab7fc",
+      "match": true
+    },
+    {
+      "symbol": "prepare_creds",
+      "miro_expected": "0xffffffc0800e4040",
+      "device_recovered": "0xffffffc0800e4040",
+      "match": true
+    },
+    {
+      "symbol": "commit_creds",
+      "miro_expected": "0xffffffc0800e45e8",
+      "device_recovered": "0xffffffc0800e45e8",
+      "match": true
+    },
+    {
+      "symbol": "timer_link",
+      "miro_expected": "0xffffffc080195d9c",
+      "device_recovered": null,
+      "match": false
+    },
+    {
+      "symbol": "task_alloc_link",
+      "miro_expected": "0xffffffc0800ab93c",
+      "device_recovered": null,
+      "match": false
+    },
+    {
+      "symbol": "cred_link",
+      "miro_expected": "0xffffffc0800e4064",
+      "device_recovered": null,
+      "match": false
+    },
+    {
+      "symbol": "selinux_state",
+      "miro_expected": "0xffffffc08237a350",
+      "device_recovered": "0xffffffc08237a350",
+      "match": true
+    },
+    {
+      "symbol": "user_ns",
+      "miro_expected": "0xffffffc08214ef90",
+      "device_recovered": null,
+      "match": false
+    },
+    {
+      "symbol": "root_user",
+      "miro_expected": "0xffffffc08214f220",
+      "device_recovered": "0xffffffc08214f220",
+      "match": true
+    },
+    {
+      "symbol": "init_groups",
+      "miro_expected": "0xffffffc082150780",
+      "device_recovered": "0xffffffc082150780",
+      "match": true
+    },
+    {
+      "symbol": "init_ucounts",
+      "miro_expected": "0xffffffc082150cf0",
+      "device_recovered": "0xffffffc082150cf0",
+      "match": true
+    },
+    {
+      "symbol": "init_task",
+      "miro_expected": "0xffffffc08213e2c0",
+      "device_recovered": "0xffffffc08213e2c0",
+      "match": true
+    },
+    {
+      "symbol": "init_cred",
+      "miro_expected": "0xffffffc082150788",
+      "device_recovered": "0xffffffc082150788",
+      "match": true
+    },
+    {
+      "symbol": "posix_timers_cache",
+      "miro_expected": "0xffffffc08235c760",
+      "device_recovered": "0xffffffc08235c760",
+      "match": true
+    },
+    {
+      "symbol": "memstart_addr",
+      "miro_expected": "0xffffffc0816873e8",
+      "device_recovered": "0xffffffc0816873e8",
+      "match": true
+    },
+    {
+      "symbol": "kimage_voffset",
+      "miro_expected": "0xffffffc0816874a0",
+      "device_recovered": "0xffffffc0816874a0",
+      "match": true
+    }
+  ]
+}
